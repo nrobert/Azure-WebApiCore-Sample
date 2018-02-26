@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Azure.WebApi.Core.Sample.Swagger;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Examples;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Azure.WebApi.Core.Sample
@@ -23,6 +25,12 @@ namespace Azure.WebApi.Core.Sample
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "AZUG FR Sample API - .Net Core 2.0", Version = "v1" });
+
+                // Change operations description
+                c.OperationFilter<OperationGenericItemsFilter>();
+
+                // Swagger Examples
+                c.OperationFilter<ExamplesOperationFilter>();
             });
         }
 
